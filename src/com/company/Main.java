@@ -4,7 +4,7 @@ import java.lang.*;
 
 public class Main {
 
-    public static int errorCheck(char letter, String phrase, int errors){
+    private static int errorCheck(char letter, String phrase, int errors){
         int count = 0;
         for (int i = 0; i < phrase.length(); i++){
             if (phrase.charAt(i) == letter){
@@ -20,7 +20,7 @@ public class Main {
         }
     }
 
-    public static String phraseObfuscation(char letter, String phrase, String lastPhrase){
+    private static String phraseObfuscation(char letter, String phrase, String lastPhrase){
         String solution = "";
         for (int i = 0; i < phrase.length(); i++){
             if (phrase.charAt(i) == letter){
@@ -39,7 +39,7 @@ public class Main {
         return solution;
     }
 
-    public static boolean isCorrect(String phrase, String puzzle){
+    private static boolean isCorrect(String phrase, String puzzle){
         if (phrase.equals(puzzle)){
             return true;
         }
@@ -60,7 +60,7 @@ public class Main {
         String currentPuzzle = "";
         boolean completed = false;
 
-        while (numberErrors < errorsAllowed && completed == false){
+        while (numberErrors < errorsAllowed && !completed){
             System.out.println("Please enter a single letter guess: ");
             Scanner scans = new Scanner(System.in);
             char letter = Character.toUpperCase(scan.next().charAt(0));
