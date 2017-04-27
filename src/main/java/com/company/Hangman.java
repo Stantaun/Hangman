@@ -4,7 +4,7 @@ import java.lang.*;
 
 public class Hangman {
 
-    private static int errorCheck(char letter, String phrase, int errors){
+    private int errorCheck(char letter, String phrase, int errors){
         int count = 0;
         for (int i = 0; i < phrase.length(); i++){
             if (phrase.charAt(i) == letter){
@@ -20,7 +20,7 @@ public class Hangman {
         }
     }
 
-    private static String phraseObfuscation(char letter, String phrase, String lastPhrase){
+    private String phraseObfuscation(char letter, String phrase, String lastPhrase){
         String solution = "";
         for (int i = 0; i < phrase.length(); i++){
             if (phrase.charAt(i) == letter){
@@ -39,7 +39,7 @@ public class Hangman {
         return solution;
     }
 
-    private static boolean isCorrect(String phrase, String puzzle){
+    private boolean isCorrect(String phrase, String puzzle){
         if (phrase.equals(puzzle)){
             return true;
         }
@@ -63,9 +63,9 @@ public class Hangman {
             System.out.println("Please enter a single letter guess: ");
             char letter = Character.toUpperCase(scan.next().charAt(0));
 
-            numberErrors = errorCheck(letter, phrase, numberErrors);
-            currentPuzzle = phraseObfuscation(letter, phrase, currentPuzzle);
-            completed = isCorrect(phrase, currentPuzzle);
+            numberErrors = this.errorCheck(letter, phrase, numberErrors);
+            currentPuzzle = this.phraseObfuscation(letter, phrase, currentPuzzle);
+            completed = this.isCorrect(phrase, currentPuzzle);
 
             System.out.println("This is the current puzzle: >" + currentPuzzle + "< False Guesses: " + numberErrors);
         }
