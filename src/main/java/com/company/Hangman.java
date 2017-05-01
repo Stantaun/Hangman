@@ -46,27 +46,42 @@ public class Hangman {
         return false;
     }
 
+    private char[] guessLetter(char[] guessed, char letter){
+        char[] results = new char[guessed.length+1];
+        for (int i = 0; i < guessed.length; i++){
+            results[i] = guessed[i];
+        }
+        results[results.length-1] = letter;
+        return results;
+    }
+
     public void run() {
         // write your code here
         System.out.println("Please enter a word or phrase for your of Hangman");
         Scanner scan = new Scanner(System.in);
         String phrase = scan.nextLine().toUpperCase();
 
-        System.out.println("Please enter the number of false guesses you would like to allow");
-        int errorsAllowed = scan.nextInt();
+//        System.out.println("Please enter the number of false guesses you would like to allow");
+//        int errorsAllowed = scan.nextInt();
 
         int numberErrors = 0;
         String currentPuzzle = "";
         boolean completed = false;
+        char[] guessed = new char[0];
+        Diagram diagram = new Diagram();
 
-        while (numberErrors < errorsAllowed && !completed){
+        while (numberErrors < 6 && !completed){
             System.out.println("Please enter a single letter guess: ");
             char letter = Character.toUpperCase(scan.next().charAt(0));
 
+            guessed = this.guessLetter(guessed, letter);
             numberErrors = this.errorCheck(letter, phrase, numberErrors);
             currentPuzzle = this.phraseObfuscation(letter, phrase, currentPuzzle);
             completed = this.isCorrect(phrase, currentPuzzle);
 
+            System.out.println(diagram.drawDiagram(numberErrors));
+
+            System.out.println(guessed);
             System.out.println("This is the current puzzle: >" + currentPuzzle + "< False Guesses: " + numberErrors);
         }
         if (completed){
